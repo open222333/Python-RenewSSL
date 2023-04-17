@@ -38,7 +38,7 @@ try:
 
     source_dir = argv.source_dir
     dest_dir = argv.dest_dir
-    
+
 except Exception as err:
     logger.error(msg=err, exc_info=True)
 
@@ -54,7 +54,7 @@ logger.debug(f'max_number: {max_number}')
 for file in files:
     m = re.search(r'(?P<num>\d{1,4})', file)
     if m and int(m.group('num')) == max_number:
-        command = f'sshpass -p {password} scp {username}@{host}:{dest_dir} {source_dir}/{file}'
+        command = f'sshpass -p {password} scp {source_dir}/{file} {username}@{host}:{dest_dir}'
         logger.debug(command)
         if not argv.test:
             os.system(command)
