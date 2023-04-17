@@ -1,7 +1,7 @@
 from configparser import ConfigParser
 
 conf = ConfigParser()
-conf.read('config.ini')
+conf.read('config/config.ini')
 
 
 HOST_IP = conf.get('TRANSFER', 'HOST_IP', fallback=None)

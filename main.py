@@ -16,7 +16,7 @@ parser.add_argument('-t', '--test', type=bool, default=False, help='是否為測
 argv = parser.parse_args()
 
 logger = Log(__name__)
-logger.set_file_handler(file_amount=1)
+# logger.set_file_handler(file_amount=1)
 logger.set_msg_handler()
 logger.set_level(argv.log_level)
 
@@ -38,6 +38,7 @@ try:
 
     source_dir = argv.source_dir
     dest_dir = argv.dest_dir
+    
 except Exception as err:
     logger.error(msg=err, exc_info=True)
 
@@ -54,5 +55,6 @@ for file in files:
     m = re.search(r'(?P<num>\d{1,4})', file)
     if m and int(m.group('num')) == max_number:
         command = f'sshpass -p {password} scp {username}@{host}:{dest_dir} {source_dir}/{file}'
+        logger.debug(command)
         if not argv.test:
             os.system(command)
